@@ -37,6 +37,19 @@ function forms(st0, action) {
     return reducer(st0, action);
 }
 
+function jobs(st0 = new Map(), action) {
+    switch(action.type) {
+        case 'ADD_JOBS':
+            let st1 = new Map(st0);
+            for (let job of action.data) {
+                st1.set(job.id, job);
+            }
+            return st1;
+        default:
+            return st0;
+    }
+}
+
 let session0 = localStorage.getItem('session');
 if (session0) {
     session0 = JSON.parse(session0);
@@ -60,6 +73,7 @@ function root_reducer(st0, action) {
     console.log("root reducer", st0, action);
     let reducer = combineReducers({
         forms,
+        jobs,
         users,
         session,
     });
