@@ -13,7 +13,7 @@ defmodule TimesheetsSPA.Tss.Ts do
   @doc false
   def changeset(ts, attrs) do
     ts
-    |> cast(attrs, [:status, :date])
-    |> validate_required([:status, :date])
+    |> cast(attrs, [:status, :date, :workerid])
+    |> validate_required([:status, :date, :workerid])
   end
 end

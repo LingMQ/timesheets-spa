@@ -28,27 +28,44 @@ export default function WorkerIndex(props) {
 } */
 
 let WorkerIndex = connect(({jobs}) => ({jobs}))(({jobs}) => {
-    console.log("aaaa")
     let jobslist = get_jobs()
-    console.log(jobslist)
     jobslist = _.map([...jobs], ([_, job]) => {
         return (
-            <div className="col">
-                <p>{job.jobname} </p>
-                <p>{job.desc} </p>
-                <p>{job.code} </p>
-                <p>{job.budgethours} </p>
-                <p>{job.manager} </p>
-            </div>
+            <tr>
+                <td>{job.jobname} </td>
+                <td>{job.desc} </td>
+                <td>{job.code} </td>
+                <td>{job.budgethours} </td>
+                <td>{job.manager} </td>
+            </tr>
         );
     });
 
     return (
         <div>
             <h1>All Available Jobs</h1>
-            <div className="row">
-                {jobslist}
-            </div>
+            <table className="table table-striped">
+                <thead>
+                <tr>
+                    <th>Jobname</th>
+                    <th>Desc</th>
+                    <th>Code</th>
+                    <th>Budgethours</th>
+                    <th>Supervisor_ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {jobslist}
+                </tbody>
+            </table>
+
+            <Nav>
+                <Nav.Item>
+                    <NavLink to="/" exact activeClassName="active" className="nav-link">
+                        Back
+                    </NavLink>
+                </Nav.Item>
+            </Nav>
         </div>
     );
 });

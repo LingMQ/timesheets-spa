@@ -13,6 +13,8 @@ defmodule TimesheetsSPAWeb.TsView do
   def render("ts.json", %{ts: ts}) do
     %{id: ts.id,
       status: ts.status,
-      date: ts.date}
+      date: ts.date,
+      workerid: ts.workerid
+    }
   end
 end

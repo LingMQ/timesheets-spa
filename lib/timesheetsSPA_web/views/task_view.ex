@@ -13,6 +13,9 @@ defmodule TimesheetsSPAWeb.TaskView do
   def render("task.json", %{task: task}) do
     %{id: task.id,
       hours: task.hours,
-      jobcode: task.jobcode}
+      jobcode: task.jobcode,
+      worker: task.worker,
+      timesheetsid: task.timesheetsid
+    }
   end
 end

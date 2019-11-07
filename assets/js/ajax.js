@@ -41,7 +41,6 @@ export function get(path) {
 export function get_jobs() {
     get('/jobs')
         .then((resp) => {
-            // console.log("list_jobs", resp);
             store.dispatch({
                 type: 'ADD_JOBS',
                 data: resp.data,

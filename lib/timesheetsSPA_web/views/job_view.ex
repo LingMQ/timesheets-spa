@@ -15,6 +15,8 @@ defmodule TimesheetsSPAWeb.JobView do
       jobname: job.jobname,
       desc: job.desc,
       code: job.code,
-      budgethours: job.budgethours}
+      budgethours: job.budgethours,
+      manager: job.manager
+    }
   end
 end
