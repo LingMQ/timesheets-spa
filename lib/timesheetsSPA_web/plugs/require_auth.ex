@@ -4,7 +4,6 @@ defmodule TimesheetsSPAWeb.Plugs.RequireAuth do
   def init(args), do: args
 
   def call(conn, _args) do
-    IO.inspect("ttttoookkkk")
     token = List.first(get_req_header(conn, "x-auth"))
     case Phoenix.Token.verify(TimesheetsSPAWeb.Endpoint, "session", token, max_age: 86400) do
       {:ok, user_id} ->

@@ -52,7 +52,7 @@ export function submit_login(form) {
                     type: 'LOG_IN',
                     data: resp,
                 });
-                form.redirect('/');
+                form.redirect('/'); // TODO: redirect to different pages
             }
             else {
                 store.dispatch({

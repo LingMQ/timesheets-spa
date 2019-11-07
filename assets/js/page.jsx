@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, NavLink, Link } from 'react-router-dom';
-import { Navbar, Nav, Col } from 'react-bootstrap';
+import {Navbar, Nav, Col, Alert} from 'react-bootstrap';
 import { Provider, connect } from 'react-redux';
 
 import Login from './login';
 import store from './store';
+
+import WorkerIndex from './worker/index';
+import ManagerIndex from './manager/index';
+
 
 export default function init_page(root) {
     let tree = (
@@ -46,16 +50,61 @@ function Page(props) {
 
             <Switch>
                 <Route exact path="/">
-                    <h1>Welcome to Timesheets SPA app</h1>
+                    <PageContent />
                 </Route>
 
                 <Route exact path="/login">
                     <Login />
                 </Route>
+
+                <Route exact path="/worker/index">
+                    <WorkerIndex />
+                </Route>
+
+                <Route exact path="/manager/index">
+                    <ManagerIndex />
+                </Route>
             </Switch>
         </Router>
     );
 }
+
+let PageContent = connect(({session}) => ({session}))(({session, dispatch}) => {
+    if (session) {
+        if (session.manager) {
+            // You are a manager
+            return (
+                <div>
+                    <h1>Manager {session.user_name}, welcome back</h1>
+                    <Nav>
+                        <Nav.Item>
+                            <NavLink to="/manager/index" exact activeClassName="active" className="nav-link">
+                                Manager Main Page
+                            </NavLink>
+                        </Nav.Item>
+                    </Nav>
+                </div>
+            );
+        } else {
+            // You are a worker
+            return (
+                <div>
+                    <h1>{session.user_name}, welcome back</h1>
+                    <Nav>
+                        <Nav.Item>
+                            <NavLink to="/worker/index" exact activeClassName="active" className="nav-link">
+                                Worker Main Page
+                            </NavLink>
+                        </Nav.Item>
+                    </Nav>
+                </div>
+            );
+        }
+    } else {
+        return (<h1>Welcome to Timesheets SPA app</h1>);
+    }
+    return (<h1>Welcome to Timesheets SPA app</h1>);
+});
 
 let Session = connect(({session}) => ({session}))(({session, dispatch}) => {
     function logout(ev) {
