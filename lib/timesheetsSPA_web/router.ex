@@ -16,8 +16,10 @@ defmodule TimesheetsSPAWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  scope "/ajax", LensWeb do
+  scope "/ajax", TimesheetsSPAWeb do
     pipe_through :ajax
+
+    resources "/sessions", SessionController, only: [:create], singleton: true
 
     resources "/users", UserController, except: [:new, :edit]
     resources "/jobs", JobController, except: [:new, :edit]
