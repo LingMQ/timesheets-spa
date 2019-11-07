@@ -19,7 +19,12 @@ function Page(props) {
                     </Nav.Item>
                     <Nav.Item>
                         <NavLink to="/users" exact activeClassName="active" className="nav-link">
-                            Users
+                            Login
+                        </NavLink>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <NavLink to="/users" exact activeClassName="active" className="nav-link">
+                            Create
                         </NavLink>
                     </Nav.Item>
                 </Nav>
@@ -27,7 +32,7 @@ function Page(props) {
 
             <Switch>
                 <Route exact path="/">
-                    <h1>Home</h1>
+                    <h1>Welcome to Timesheets SPA app</h1>
                 </Route>
 
                 <Route exact path="/users">
