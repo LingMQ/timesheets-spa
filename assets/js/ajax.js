@@ -24,7 +24,10 @@ export function post(path, body) {
 
 export function get(path) {
     let state = store.getState();
-    let token = state.session.token;
+    let token = "";
+    if (state.session) {
+        token = state.session.token;
+    }
 
     return fetch('/ajax' + path, {
         method: 'get',
@@ -47,6 +50,29 @@ export function get_jobs() {
             });
         });
 }
+
+export function get_jobs_by_id(id) {
+    get('/jobs')
+        .then((resp) => {
+            store.dispatch({
+                type: 'ADD_JOBS_BY_ID',
+                data: resp.data,
+                managerid: id,
+            });
+        });
+}
+
+export function get_user_by_id(id) {
+    get('/users')
+        .then((resp) => {
+            store.dispatch({
+                type: 'ADD_USER_BY_ID',
+                data: resp.data,
+                userid: id,
+            });
+        });
+}
+
 
 export function submit_login(form) {
     let state = store.getState();

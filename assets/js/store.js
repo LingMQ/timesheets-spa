@@ -45,6 +45,14 @@ function jobs(st0 = new Map(), action) {
                 st1.set(job.id, job);
             }
             return st1;
+        case 'ADD_JOBS_BY_ID':
+            let st2 = new Map(st0);
+            for (let job of action.data) {
+                if (job.manager === action.managerid) {
+                    st2.set(job.id, job);
+                }
+            }
+            return st2;
         default:
             return st0;
     }
@@ -66,7 +74,18 @@ function session(st0 = session0, action) {
 }
 
 function users(st0 = new Map(), action) {
-    return st0;
+    switch (action.type) {
+        case 'ADD_USER_BY_ID':
+            let st1 = new Map(st0);
+            for (let user of action.data) {
+                if (user.id == action.userid) {
+                    st1.set(user.id, user);
+                }
+            }
+            return st1;
+        default:
+            return st0;
+    }
 }
 
 function root_reducer(st0, action) {
