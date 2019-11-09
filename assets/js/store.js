@@ -45,7 +45,7 @@ function tss(st0 = {workerid: 0, date: null, job_codes: [], hours: []}, action) 
                 return Object.assign({}, st0, action.data);
             } else {
                 // sum_hour > 8
-                alert("ERROR: You can't work more than 8 hours per day")
+                alert("ERROR: You can't work more than 8 hours per day. Timesheets is not created.")
             }
         default:
             return st0;

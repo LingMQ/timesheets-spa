@@ -66,7 +66,7 @@ class CreateSheet extends React.Component {
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridJob">
-                            <Form.Label>Job</Form.Label>
+                            <Form.Label>Job Code</Form.Label>
                             <Form.Control type="job_code" placeholder="Enter Job Code" onChange={(en) => this.handel_change_job_code(0, en)}/>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridHour">
