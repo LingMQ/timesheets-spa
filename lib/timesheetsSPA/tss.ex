@@ -67,7 +67,7 @@ defmodule TimesheetsSPA.Tss do
   def create_ts(attrs \\ %{}) do
     %Ts{}
     |> Ts.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert(on_conflict: :nothing)
   end
 
   @doc """

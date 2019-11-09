@@ -14,6 +14,7 @@ defmodule TimesheetsSPA.Tss.Ts do
   def changeset(ts, attrs) do
     ts
     |> cast(attrs, [:status, :date, :workerid])
+    |> unique_constraint(:id, name: :tss_workerid_date_index, message: "duplicate timesheets")
     |> validate_required([:status, :date, :workerid])
   end
 end

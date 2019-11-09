@@ -55,7 +55,7 @@ function tss(st0 = {workerid: 0, date: null, job_codes: [], hours: []}, action) 
                 return parseInt(item, 10);
             })
             let sum_hour = eval(all_hours.join('+'))
-            if (sum_hour < 8) {
+            if (sum_hour < 8 && sum_hour > 0) {
                 alert("You are working less than 8 hours");
                 alert("Timesheets Created Successfully");
                 return Object.assign({}, st0, action.data);

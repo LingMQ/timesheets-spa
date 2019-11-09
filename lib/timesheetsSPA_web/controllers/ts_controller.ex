@@ -20,7 +20,11 @@ defmodule TimesheetsSPAWeb.TsController do
   def create(conn, %{"workerid" => workerid, "date" => date, "job_codes" => job_codes, "hours" => hours}) do
     curr = Tss.check_appeared(workerid, date)
     if curr do
-      Tss.update_ts(curr, %{status: "Approved"})
+      if hours === [] && job_codes === [] do
+
+      else
+        Tss.update_ts(curr, %{status: "Approved"})
+      end
 
     else
       hours = Enum.map(hours, fn hour ->
