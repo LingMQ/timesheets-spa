@@ -7,7 +7,7 @@ defmodule TimesheetsSPAWeb.TsView do
   end
 
   def render("show.json", %{ts: ts}) do
-    %{data: render_one(ts, TsView, "ts.json")}
+    %{data: render_many(ts, TsView, "ts.json")}
   end
 
   def render("ts.json", %{ts: ts}) do

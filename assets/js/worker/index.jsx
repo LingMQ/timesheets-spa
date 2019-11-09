@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { Nav } from 'react-bootstrap';
-import {NavLink} from "react-router-dom";
+import {BrowserRouter as Router, NavLink} from "react-router-dom";
 import { connect } from 'react-redux';
 import { get_jobs_by_id } from '../ajax';
 
 import _ from 'lodash';
 import CreateSheet from "./create_ts";
+import TSPage from "./ts_page";
 
 /*
 export default function WorkerIndex(props) {
@@ -59,10 +60,11 @@ let WorkerIndex = connect(({jobs}) => ({jobs}))(({jobs}) => {
             <Nav>
                 <Nav.Item>
                     <NavLink to="/" exact activeClassName="active" className="nav-link">
-                        Back to Welcome Page
+                        Back to Worker Main Page
                     </NavLink>
                 </Nav.Item>
             </Nav>
+
             <table className="table table-striped">
                 <thead>
                 <tr>

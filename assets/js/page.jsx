@@ -9,6 +9,7 @@ import store from './store';
 
 import WorkerIndex from './worker/index';
 import ManagerIndex from './manager/index';
+import TSPage from "./worker/ts_page";
 
 
 export default function init_page(root) {
@@ -36,11 +37,6 @@ function Page(props) {
                             Login
                         </NavLink>
                     </Nav.Item>
-                    <Nav.Item>
-                        <NavLink to="/users" exact activeClassName="active" className="nav-link">
-                            Create
-                        </NavLink>
-                    </Nav.Item>
                 </Nav>
                 </Col>
                 <Col md="4">
@@ -59,6 +55,9 @@ function Page(props) {
 
                 <Route exact path="/worker/index">
                     <WorkerIndex />
+                </Route>
+                <Route exact path="/worker/ts">
+                    <TSPage />
                 </Route>
 
                 <Route exact path="/manager/index">
@@ -93,7 +92,15 @@ let PageContent = connect(({session}) => ({session}))(({session, dispatch}) => {
                     <Nav>
                         <Nav.Item>
                             <NavLink to="/worker/index" exact activeClassName="active" className="nav-link">
-                                Worker Main Page
+                                Submit My Timesheets
+                            </NavLink>
+                        </Nav.Item>
+                    </Nav>
+
+                    <Nav>
+                        <Nav.Item>
+                            <NavLink to="/worker/ts" exact activeClassName="active" className="nav-link">
+                                View My Timesheets
                             </NavLink>
                         </Nav.Item>
                     </Nav>

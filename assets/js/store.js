@@ -29,29 +29,51 @@ function login(st0 = {email: "", password: "", errors: null}, action) {
     }
 }
 
-function tss(st0 = {workerid: 0, date: null, job_codes: [], hours: []}, action) {
+function sheets(st0 = {data: [], tasks: []}, action) {
     switch(action.type) {
-        case 'CREATE_NEW_SHEET':
-            let all_hours = st0.hours.map(function(item) {
-                return parseInt(item, 10);
-            })
-            let sum_hour = eval(all_hours.join('+'))
-            if (sum_hour < 8) {
-                alert("You are working else than 8 hours");
-                alert("Timesheets Created Successfully");
-                return Object.assign({}, st0, action.data);
-            } else if (sum_hour == 8) {
-                alert("Timesheets Created Successfully");
-                return Object.assign({}, st0, action.data);
-            } else {
-                // sum_hour > 8
-                alert("ERROR: You can't work more than 8 hours per day. Timesheets is not created.")
-            }
+        case 'ADD_SHEETS':
+            console.log("sssssssss")
+            console.log(action.data)
+            console.log(Object.assign({}, st0, action.data))
+            console.log(st0)
+            return Object.assign({}, st0, action.data);
+        case 'SHOW_TASKS':
+            let task = {tasks: action.tasks.data};
+            return Object.assign({}, st0, task);
         default:
             return st0;
     }
 }
 
+function tss(st0 = {workerid: 0, date: null, job_codes: [], hours: []}, action) {
+    switch(action.type) {
+        case 'ADD_TS_BY_WORKER_ID':
+            let st1 = new Map();
+            for (let ts of action.data) {
+                st1.set(ts.id, ts);
+            }
+            return st1;
+        case 'CREATE_NEW_SHEET':
+            let all_hours = action.data.hours.map(function(item) {
+                return parseInt(item, 10);
+            })
+            let sum_hour = eval(all_hours.join('+'))
+            if (sum_hour < 8) {
+                alert("You are working less than 8 hours");
+                alert("Timesheets Created Successfully");
+                return Object.assign({}, st0, action.data);
+            } else if (sum_hour == 8) {
+                alert("Timesheets Created Successfully");
+                return Object.assign({}, st0, action.data);
+            } else if (sum_hour > 8) {
+                // sum_hour > 8
+                alert("ERROR: You can't work more than 8 hours per day. Timesheets is not created.")
+            }
+            // return Object.assign({}, st0, action.data);
+        default:
+            return st0;
+    }
+}
 
 function forms(st0, action) {
     let reducer = combineReducers({
@@ -119,6 +141,7 @@ function root_reducer(st0, action) {
         jobs,
         users,
         session,
+        sheets,
     });
     return deepFreeze(reducer(st0, action));
 }

@@ -73,6 +73,47 @@ export function get_user_by_id(id) {
         });
 }
 
+export function get_ts_by_workerid(id) {
+    get('/tss')
+        .then((resp) => {
+            store.dispatch({
+                type: 'ADD_TS_BY_WORKER_ID',
+                data: resp.data,
+                workerid: id,
+            });
+        });
+}
+
+export function get_sheets(sheet_id) {
+    // get all sheets
+    let worker_id = JSON.parse(localStorage.getItem("session")).user_id;
+    if (sheet_id == 0) {
+        get('/tss/' + worker_id)
+            .then((resp) => {
+                // TODO: remove this print
+                console.log("get sheets");
+                console.log(resp);
+                store.dispatch({
+                    type: 'ADD_SHEETS',
+                    data: resp,
+                });
+            });
+    }
+    else {
+        console.log("get tasks in a specific sheet");
+        get('/tasks/' + sheet_id)
+            .then((resp) => {
+                // TODO: remove this print
+                console.log("show tasks: we got that");
+                console.log(resp);
+                store.dispatch({
+                    type: 'SHOW_TASKS',
+                    tasks: resp,
+                });
+            });
+    }
+}
+
 export function create_sheet(form) {
     let state = store.getState();
     let data = state.tss;

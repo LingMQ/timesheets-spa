@@ -37,6 +37,14 @@ defmodule TimesheetsSPA.Tasks do
   """
   def get_task!(id), do: Repo.get!(Task, id)
 
+  def get_task_by_sheets(id) do
+    {a, _} = Integer.parse(id)
+    query = from ts in "tasks", where: ts.timesheetsid == ^a, select: %{id: ts.id, hours: ts.hours, jobcode: ts.jobcode,
+      worker: ts.worker, timesheetsid: ts.timesheetsid}
+    Repo.all(query)
+  end
+
+
   @doc """
   Creates a task.
 

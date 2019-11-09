@@ -61,7 +61,7 @@ defmodule TimesheetsSPAWeb.TsController do
   end
 
   def show(conn, %{"id" => id}) do
-    ts = Tss.get_ts!(id)
+    ts = Tss.get_ts_by_worker(id)
     render(conn, "show.json", ts: ts)
   end
 
