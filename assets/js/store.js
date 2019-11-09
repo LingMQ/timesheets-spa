@@ -31,11 +31,8 @@ function login(st0 = {email: "", password: "", errors: null}, action) {
 
 function sheets(st0 = {data: [], tasks: []}, action) {
     switch(action.type) {
+        case 'UPDATE_SHEET':
         case 'ADD_SHEETS':
-            console.log("sssssssss")
-            console.log(action.data)
-            console.log(Object.assign({}, st0, action.data))
-            console.log(st0)
             return Object.assign({}, st0, action.data);
         case 'SHOW_TASKS':
             let task = {tasks: action.tasks.data};

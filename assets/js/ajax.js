@@ -84,6 +84,43 @@ export function get_ts_by_workerid(id) {
         });
 }
 
+export function update_sheets(sheet_id) {
+    let state = store.getState();
+    let data = state.sheets.data;
+    var i;
+    let one;
+    for (i = 0; i < data.length; i++) {
+        console.log("data")
+        console.log(data[i].id)
+        console.log(sheet_id)
+        if (data[i].id == sheet_id) {
+            one = data[i];
+            break;
+        }
+    }
+
+    console.log("wwwwwwwww")
+    console.log(one)
+
+    let newOne = {
+        date: one.date,
+        workerid: one.workerid,
+        job_codes: [],
+        hours: []
+    }
+    console.log(newOne)
+
+    post('/tss', newOne)
+        .then((resp) => {
+            console.log("goifwhvj");
+            console.log(resp);
+            store.dispatch({
+                type: 'UPDATE_SHEET',
+                data:  resp,
+            });
+        })
+}
+
 export function get_sheets(sheet_id) {
     // get all sheets
     let worker_id = JSON.parse(localStorage.getItem("session")).user_id;

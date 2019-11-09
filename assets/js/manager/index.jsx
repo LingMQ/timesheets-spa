@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {Form, Button, Nav} from 'react-bootstrap';
 import {NavLink} from "react-router-dom";
-import {get_sheets} from "../ajax";
+import {get_sheets, update_sheets} from "../ajax";
 import {connect} from "react-redux";
 
 
@@ -62,7 +62,7 @@ class ManagerIndex extends React.Component {
 
                 <Button variant="primary" onClick={() => {
                     let sheet_id = document.getElementById("mySelect").value;
-                    get_sheets(sheet_id);
+                    update_sheets(sheet_id)
                 }}>
                     Approve
                 </Button>

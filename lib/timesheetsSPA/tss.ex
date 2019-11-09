@@ -21,6 +21,10 @@ defmodule TimesheetsSPA.Tss do
     Repo.all(Ts)
   end
 
+  def check_appeared(workerid, date)do
+    Repo.get_by(Ts, [workerid: workerid, date: date])
+  end
+
   @doc """
   Gets a single ts.
 
@@ -112,4 +116,11 @@ defmodule TimesheetsSPA.Tss do
   def change_ts(%Ts{} = ts) do
     Ts.changeset(ts, %{})
   end
+
+  def update_ts(%Ts{} = ts, attrs) do
+    ts
+    |> Ts.changeset(attrs)
+    |> Repo.update()
+  end
+
 end
