@@ -3,7 +3,7 @@ defmodule TimesheetsSPA.Repo.Migrations.CreateTss do
 
   def change do
     create table(:tss) do
-      add :status, :string, null: false
+      add :status, :string, default: "New"
       add :date, :date, null: false
       add :workerid, references(:users, on_delete: :nothing)
 

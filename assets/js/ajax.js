@@ -73,6 +73,21 @@ export function get_user_by_id(id) {
         });
 }
 
+export function create_sheet(form) {
+    let state = store.getState();
+    let data = state.tss;
+
+    post('/tss', data)
+            .then((resp) => {
+                if (resp.data) {
+                    store.dispatch({
+                        type: 'CREATE_NEW_SHEET',
+                        data: resp,
+                    });
+                }
+            })
+}
+
 
 export function submit_login(form) {
     let state = store.getState();

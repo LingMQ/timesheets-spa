@@ -23,9 +23,9 @@ Repo.insert!(%User{id: 3, name: "manager2", email: "m2@timesheet.com", manager: 
 
 Repo.insert!(%User{id: 4, name: "alice", email: "alice@example.com", manager: false, manager_id: 1, password_hash: pw2})
 Repo.insert!(%User{id: 5, name: "bob", email: "bob@example.com", manager: false, manager_id: 1, password_hash: pw2})
-Repo.insert!(%User{id: 6, name: "worker1", email: "w1@timesheet.com", manager: false, manager_id: 4, password_hash: pw2})
-Repo.insert!(%User{id: 7, name: "worker2", email: "w2@timesheet.com", manager: false, manager_id: 4, password_hash: pw2})
-Repo.insert!(%User{id: 8, name: "worker3", email: "w3@timesheet.com", manager: false, manager_id: 4, password_hash: pw2})
+Repo.insert!(%User{id: 6, name: "worker1", email: "w1@timesheet.com", manager: false, manager_id: 3, password_hash: pw2})
+Repo.insert!(%User{id: 7, name: "worker2", email: "w2@timesheet.com", manager: false, manager_id: 3, password_hash: pw2})
+Repo.insert!(%User{id: 8, name: "worker3", email: "w3@timesheet.com", manager: false, manager_id: 3, password_hash: pw2})
 
 Repo.insert!(%Job{id: 1, jobname: "moon", desc: "moving to moon", code: "A12", budgethours: 20, manager: 1})
 Repo.insert!(%Job{id: 3, jobname: "earth", desc: "saving earth environment", code: "A15", budgethours: 50, manager: 1})

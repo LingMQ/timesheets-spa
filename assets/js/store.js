@@ -29,6 +29,29 @@ function login(st0 = {email: "", password: "", errors: null}, action) {
     }
 }
 
+function tss(st0 = {workerid: 0, date: null, job_codes: [], hours: []}, action) {
+    switch(action.type) {
+        case 'CREATE_NEW_SHEET':
+            let all_hours = st0.hours.map(function(item) {
+                return parseInt(item, 10);
+            })
+            let sum_hour = eval(all_hours.join('+'))
+            if (sum_hour < 8) {
+                alert("You are working else than 8 hours");
+                alert("Timesheets Created Successfully");
+                return Object.assign({}, st0, action.data);
+            } else if (sum_hour == 8) {
+                alert("Timesheets Created Successfully");
+                return Object.assign({}, st0, action.data);
+            } else {
+                // sum_hour > 8
+                alert("ERROR: You can't work more than 8 hours per day")
+            }
+        default:
+            return st0;
+    }
+}
+
 
 function forms(st0, action) {
     let reducer = combineReducers({
@@ -91,6 +114,7 @@ function users(st0 = new Map(), action) {
 function root_reducer(st0, action) {
     console.log("root reducer", st0, action);
     let reducer = combineReducers({
+        tss,
         forms,
         jobs,
         users,

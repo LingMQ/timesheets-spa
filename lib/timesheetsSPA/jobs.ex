@@ -37,6 +37,12 @@ defmodule TimesheetsSPA.Jobs do
   """
   def get_job!(id), do: Repo.get!(Job, id)
 
+  def get_job_by_code(code) do
+    query = from j in "jobs", where: j.code == ^code, select: j.id
+    IO.inspect(Repo.all(query))
+    Enum.at(Repo.all(query), 0)
+  end
+
   @doc """
   Creates a job.
 
