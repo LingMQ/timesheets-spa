@@ -6,6 +6,8 @@ defmodule TimesheetsSPAWeb.TsController do
   alias TimesheetsSPA.Tasks
   alias TimesheetsSPA.Jobs
 
+  alias TimesheetsSPA.Users
+
   action_fallback TimesheetsSPAWeb.FallbackController
 
   def index(conn, _params) do
@@ -62,7 +64,20 @@ defmodule TimesheetsSPAWeb.TsController do
 
   def show(conn, %{"id" => id}) do
     ts = Tss.get_ts_by_worker(id)
-    render(conn, "show.json", ts: ts)
+    user = Users.get_user!(id)
+    if user.manager_id == -1 do
+      ts = []
+      # this is a manager
+
+      # get all managed user and render
+      all_user = Users.get_user_by_manager(id)
+      all_user = Enum.map(all_user, fn u -> Tss.get_ts_by_worker(u.id) end)
+      ts = Enum.reduce(all_user, [], fn (u, acc) -> Enum.concat(u, acc) end)
+      render(conn, "show.json", ts: ts)
+    else
+      # this is a user
+      render(conn, "show.json", ts: ts)
+    end
   end
 
   def update(conn, %{"id" => id, "ts" => ts_params}) do

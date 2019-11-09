@@ -114,6 +114,38 @@ export function get_sheets(sheet_id) {
     }
 }
 
+export function get_sheets_m(sheet_id) {
+    // get all sheets
+    let manager_id = JSON.parse(localStorage.getItem("session")).user_id;
+
+
+    if (sheet_id == 0) {
+        get('/tss/' + manager_id)
+            .then((resp) => {
+                // TODO: remove this print
+                console.log("get sheets");
+                console.log(resp);
+                store.dispatch({
+                    type: 'ADD_SHEETS_M',
+                    data: resp,
+                });
+            });
+    }
+    else {
+        console.log("get tasks in a specific sheet");
+        get('/tasks/' + sheet_id)
+            .then((resp) => {
+                // TODO: remove this print
+                console.log("show tasks: we got that");
+                console.log(resp);
+                store.dispatch({
+                    type: 'SHOW_TASKS',
+                    tasks: resp,
+                });
+            });
+    }
+}
+
 export function create_sheet(form) {
     let state = store.getState();
     let data = state.tss;

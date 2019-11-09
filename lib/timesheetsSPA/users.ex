@@ -109,4 +109,11 @@ defmodule TimesheetsSPA.Users do
       _else       -> nil
     end
   end
+
+  def get_user_by_manager(id) do
+    {a, _} = Integer.parse(id)
+    query = from w in "users", where: w.manager_id == ^a, select: %{id: w.id, name: w.name, email: w.email,
+      manager: w.manager, manager_id: w.manager_id}
+    Repo.all(query)
+  end
 end

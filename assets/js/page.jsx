@@ -78,7 +78,7 @@ let PageContent = connect(({session}) => ({session}))(({session, dispatch}) => {
                     <Nav>
                         <Nav.Item>
                             <NavLink to="/manager/index" exact activeClassName="active" className="nav-link">
-                                Manager Main Page
+                                View Submitted Timesheets
                             </NavLink>
                         </Nav.Item>
                     </Nav>

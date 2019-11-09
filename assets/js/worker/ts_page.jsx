@@ -19,8 +19,6 @@ class TSPage extends React.Component {
             return <Redirect to={this.state.redirect}/>;
         }
         let tslist = this.props.data;
-        console.log("****--")
-        console.log(tslist)
 
         if (tslist.length == 0) {
             get_sheets(0);

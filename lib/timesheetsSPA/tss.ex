@@ -38,9 +38,14 @@ defmodule TimesheetsSPA.Tss do
   def get_ts!(id), do: Repo.get!(Ts, id)
 
   def get_ts_by_worker(id) do
-    {a, _} = Integer.parse(id)
-    query = from ts in "tss", where: ts.workerid == ^a, select: %{id: ts.id, date: ts.date, workerid: ts.workerid, status: ts.status}
-    Repo.all(query)
+    if !is_binary(id) do
+      query = from ts in "tss", where: ts.workerid == ^id, select: %{id: ts.id, date: ts.date, workerid: ts.workerid, status: ts.status}
+      Repo.all(query)
+    else
+      {a, _} = Integer.parse(id)
+      query = from ts in "tss", where: ts.workerid == ^a, select: %{id: ts.id, date: ts.date, workerid: ts.workerid, status: ts.status}
+      Repo.all(query)
+    end
   end
 
   @doc """
